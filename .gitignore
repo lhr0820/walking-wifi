@@ -1,0 +1,97 @@
+# ────────────────────────────────────────────────
+#  Walking WiFi · Git 忽略规则
+#
+#  原则：代码开源，数据不入库。
+#  真实门店网络数据（含口令）属于敏感内容，
+#  不进版本库、不进 Release、不出现在任何公开产物里。
+#  仓库里只放结构完整的示例数据，clone 后能构建、能跑，但查不到真实口令。
+# ────────────────────────────────────────────────
+
+# ══ 依赖与构建产物 ══
+node_modules/
+build/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+release/
+captures/
+.externalNativeBuild/
+.cxx/
+.gradle/
+.kotlin/
+local.properties
+
+# ══ IDE ══
+.idea/
+*.iml
+.DS_Store
+*.hprof
+.vscode/
+
+# ══ 签名材料（绝对不能进仓库）══
+*.jks
+*.keystore
+*.p12
+keystore.properties
+signing.properties
+
+# ══ 真实数据（敏感，改为本地维护）══
+# Android 侧三个数据文件（读取处都有 try-catch，缺失不崩，只是查不到）
+app/src/main/assets/brand_rules.json
+app/src/main/assets/seed_wifi.json
+app/src/main/assets/weak_passwords.txt
+# 小程序侧种子库与其备份
+miniprogram/data/seed.js
+miniprogram/data/*.bak
+# 云函数数据包
+miniprogram/cloudfunctions/wifiLookup/data.json
+# 后端 SQL 导入文件（含明文口令）
+backend/*.sql
+!backend/schema.sql
+# 采集器：脚本保留，产出与目标清单不入库
+harvester/output/
+harvester/*.json
+harvester/*.txt
+harvester/targets*
+harvester/brands*
+
+# ══ 文档目录整体不入库 ══
+# docs 里的实测报告、进度记录大量引用了真实口令做举例，
+# 逐篇脱敏成本高且容易漏，整体排除更稳妥。
+# 对外说明统一看根目录 README.md。
+docs/
+
+# ══ 一次性脚本（个人的临时工具，不是项目资产）══
+addbrands.py
+calc_cover.py
+calc2.py
+fixc.py
+
+# ══ 凭据与环境 ══
+.env
+.env.*
+*.token
+wrangler.toml
+!wrangler.example.toml
+# Cloudflare / Wrangler 本地缓存（含账号信息与 token 线索）
+backend/.wrangler/
+backend/.cloudflare/
+.wrangler/
+.cloudflare/
+
+# ══ 备份与临时文件 ══
+*.bak
+*.redact.bak
+*.orig
+*.rej
+*.tmp
+.git-staged.txt
+
+# ══ 测试产物 ══
+automator-test/*.log
+automator-test/screenshots/
+*.log
+# ══ 本地备份（脱敏前的原文件，绝不入库）══
+.local-backup/

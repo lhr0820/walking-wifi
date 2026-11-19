@@ -1,0 +1,18 @@
+{
+  "_comment": "示例云函数数据包。真实数据不进仓库。格式：v 版本、brands 品牌数组（b 品牌名 / a 别名 / p 候选口令 / c 可信度）。",
+  "v": "2026-11-19-example",
+  "brands": [
+    {
+      "b": "示例品牌A",
+      "a": ["examplea", "EXAMPLA"],
+      "p": ["example-psk-a-1", "example-psk-a-2"],
+      "c": 1
+    },
+    {
+      "b": "示例品牌B",
+      "a": ["exampleb", "EXAMPLB"],
+      "p": ["example-psk-b-1"],
+      "c": 2
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "_comment": "示例种子数据。真实数据不进仓库。字段：ssid 网络名、passwords 候选口令、score 可信度。",
+    "ssid": "EXAMPLE-CAFE",
+    "passwords": ["example-psk-1", "example-psk-2"],
+    "score": 2
+  },
+  {
+    "ssid": "EXAMPLE-STORE",
+    "passwords": ["example-psk-3"],
+    "score": 1
+  }
+]

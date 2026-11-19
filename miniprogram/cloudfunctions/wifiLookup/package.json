@@ -1,0 +1,7 @@
+{
+  "name": "wifiLookup",
+  "version": "1.0.0",
+  "description": "门店公用网络口令查询云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

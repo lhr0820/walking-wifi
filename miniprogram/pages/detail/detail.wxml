@@ -1,0 +1,73 @@
+<view class="container" wx:if="{{rec}}">
+  <!-- 头部 -->
+  <view class="card">
+    <view style="display:flex;align-items:center;flex-wrap:wrap;">
+      <text class="title">{{rec.name}}</text>
+      <text wx:if="{{rec.verified}}" class="badge badge-ok" style="margin-left:14rpx;">已验证</text>
+      <text wx:if="{{rec.custom}}" class="badge badge-plain" style="margin-left:8rpx;">我录入的</text>
+    </view>
+
+    <view style="margin-top:18rpx;">
+      <text wx:if="{{rec.portal}}" class="badge badge-warn">需网页认证</text>
+      <text wx:if="{{rec.passwords[0] === ''}}" class="badge badge-info">开放网络</text>
+      <text wx:if="{{rec.passwords[0] !== ''}}" class="badge badge-plain">需要密码</text>
+      <text class="badge badge-plain">可信度 {{rec.confidence}}/3</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- SSID -->
+    <view class="row">
+      <view class="row-left">
+        <view class="dim">SSID</view>
+        <view class="mono" style="font-size:30rpx;margin-top:8rpx;">{{rec.ssidPatterns[0] || '未知'}}</view>
+      </view>
+      <view bindtap="copySsid" style="color:#60A5FA;font-size:25rpx;padding:10rpx;">复制</view>
+    </view>
+
+    <!-- 密码 -->
+    <block wx:if="{{rec.passwords[0] !== ''}}">
+      <view class="divider"></view>
+      <view class="row">
+        <view class="row-left">
+          <view class="dim">密码</view>
+          <view class="mono psk-big" wx:if="{{showPsk}}">{{rec.passwords[0]}}</view>
+          <view class="mono psk-big psk-hidden" wx:else>••••••••</view>
+        </view>
+        <view style="display:flex;gap:16rpx;">
+          <view bindtap="togglePsk" style="color:#9AA3AF;font-size:25rpx;padding:10rpx;">{{showPsk ? '隐藏' : '显示'}}</view>
+          <view bindtap="copyPsk" style="color:#60A5FA;font-size:25rpx;padding:10rpx;">复制</view>
+        </view>
+      </view>
+      <view wx:if="{{rec.passwords.length > 1}}" class="dim" style="margin-top:14rpx;">
+        其他可能：{{rec.passwords[1]}}
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="divider"></view>
+      <view class="muted">这个网络是开放的，不需要密码，直接连即可。</view>
+    </block>
+  </view>
+
+  <!-- 连接步骤 -->
+  <view class="card">
+    <view class="section-title">怎么连</view>
+    <view class="step" wx:for="{{steps}}" wx:key="*this">
+      <view class="step-no">{{index + 1}}</view>
+      <view class="step-text">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="btn btn-primary" bindtap="markDone">我连上了（标记已验证）</view>
+  <view class="btn-row">
+    <view class="btn btn-ghost" bindtap="edit">编辑</view>
+    <view class="btn btn-ghost" bindtap="removeRec" style="color:#F87171;">删除</view>
+  </view>
+
+  <view class="empty" style="padding-top:30rpx;font-size:22rpx;">
+    密码来自公开信息，不同门店可能不一样\n连不上就直接问店员，通常更快
+  </view>
+
+</view>

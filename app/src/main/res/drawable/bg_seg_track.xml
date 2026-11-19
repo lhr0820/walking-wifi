@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 分段控件的轨道（对应 magpie 的 seg-track）：比 pill 再深一档，让滑块能立起来 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/seg_track" />
+    <corners android:radius="10dp" />
+</shape>

@@ -1,0 +1,46 @@
+<view class="container">
+
+  <view class="card">
+    <view class="row">
+      <view class="row-left">
+        <view class="title">自检结果</view>
+        <view class="muted" style="margin-top:10rpx;">{{summary}}</view>
+      </view>
+      <view class="badge {{overall === 'ok' ? 'badge-ok' : 'badge-err'}}">{{overall === 'ok' ? '通过' : '有失败'}}</view>
+    </view>
+    <view class="btn btn-ghost" style="margin-top:20rpx;" bindtap="copy">复制结果</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">逐项检查</view>
+    <view class="check" wx:for="{{checks}}" wx:key="name">
+      <view class="check-icon {{item.ok ? 'ico-ok' : 'ico-err'}}">{{item.ok ? '✓' : '✕'}}</view>
+      <view class="row-left">
+        <view style="font-size:28rpx;color:{{item.ok ? '#E6E8EB' : '#F87171'}};">{{item.name}}</view>
+        <view class="dim" style="margin-top:6rpx;">{{item.detail}}</view>
+      </view>
+    </view>
+    <view class="dim" wx:if="{{stage === 'running'}}" style="text-align:center;padding:20rpx;">
+      正在探测 getConnectedWifi…
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">页面跳转测试</view>
+    <view class="dim" style="line-height:1.8;">
+      · index 首页　✓ 已渲染（64 条列表）
+      · detail 详情　→ 用下方按钮进
+      · add 录入　→ 用下方按钮进
+    </view>
+    <view class="btn-row" style="margin-top:20rpx;">
+      <view class="btn btn-ghost" bindtap="goDetail">测详情页</view>
+      <view class="btn btn-ghost" bindtap="goAdd">测录入页</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">异常堆栈</view>
+    <view class="mono dim" style="font-size:22rpx;word-break:break-all;">{{raw}}</view>
+  </view>
+
+</view>

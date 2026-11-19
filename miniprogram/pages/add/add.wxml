@@ -1,0 +1,56 @@
+<view class="container">
+
+  <view class="card-flat">
+    <view class="muted">
+      录入你在店里看到的 WiFi 信息。填一次，下次到这家店直接搜店名就能查到。
+    </view>
+  </view>
+
+  <view class="field">
+    <view class="field-label">店名 *</view>
+    <input class="field-input" placeholder="例如：老王烧烤" placeholder-class="search-input-placeholder"
+           value="{{name}}" bindinput="onName" />
+  </view>
+
+  <view class="field">
+    <view class="field-label">WiFi 名称（SSID）*</view>
+    <input class="field-input" placeholder="在手机 WiFi 列表里看到的那个名字"
+           placeholder-class="search-input-placeholder"
+           value="{{ssid}}" bindinput="onSsid" />
+  </view>
+
+  <view class="field">
+    <view class="field-label">密码（开放网络留空）</view>
+    <view style="display:flex;gap:16rpx;">
+      <input class="field-input" style="flex:1;" placeholder="8-63 位，留空表示不需要密码"
+             placeholder-class="search-input-placeholder"
+             value="{{psk}}" bindinput="onPsk" />
+      <view class="btn btn-ghost" style="margin-top:0;padding:22rpx 28rpx;" bindtap="paste">粘贴</view>
+    </view>
+  </view>
+
+  <view class="field">
+    <view class="row">
+      <view>
+        <view style="font-size:28rpx;">连上后还要网页认证？</view>
+        <view class="dim" style="margin-top:6rpx;">比如要输手机号、点「接受」才能上网</view>
+      </view>
+      <switch checked="{{portal}}" bindchange="onPortal" color="#2F6FED" />
+    </view>
+  </view>
+
+  <view class="field">
+    <view class="field-label">备注（可选）</view>
+    <textarea class="field-textarea" placeholder="比如：密码在收银台、下午网速慢"
+              placeholder-class="search-input-placeholder"
+              value="{{note}}" bindinput="onNote" maxlength="120" />
+  </view>
+
+  <view class="btn btn-primary" bindtap="save">{{isEdit ? '保存修改' : '添加这条记录'}}</view>
+  <view class="btn btn-ghost" wx:if="{{!isEdit}}" bindtap="reset">清空</view>
+
+  <view class="empty" style="padding-top:36rpx;font-size:22rpx;">
+    所有数据只存在你手机本地，不上传\n小程序无法自动连接 WiFi，需要你手动去系统 WiFi 列表连
+  </view>
+
+</view>

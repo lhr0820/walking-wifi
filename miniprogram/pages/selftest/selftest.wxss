@@ -1,0 +1,19 @@
+.check {
+  display: flex;
+  align-items: flex-start;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #22262C;
+}
+.check:last-child { border-bottom: none; }
+.check-icon {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  margin-right: 18rpx;
+  flex-shrink: 0;
+}
+.ico-ok { background: #14532D; color: #4ADE80; }
+.ico-err { background: #450A0A; color: #F87171; }

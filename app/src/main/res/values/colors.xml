@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设计 token 全部取自 yetone/magpie 的 internal/gui/assets/app.css :root[data-theme="light"]
+  这是亮色主题；暗色在 values-night/colors.xml
+-->
+<resources>
+    <!-- 表面层级：bg → card → card2 -->
+    <color name="bg">#f4f4f6</color>
+    <color name="card">#ffffff</color>
+    <color name="card_2">#f9f9fb</color>
+
+    <!-- 胶囊控件 -->
+    <color name="pill">#f1f1f4</color>
+    <color name="pill_hover">#e9e9ee</color>
+    <color name="seg_track">#e6e6eb</color>
+
+    <!-- 分割线：line 用于卡片外框，line_2 用于卡片内行间 -->
+    <color name="line">#e3e3e8</color>
+    <color name="line_2">#ececf0</color>
+
+    <!-- 文字四级 -->
+    <color name="fg">#1c1c21</color>
+    <color name="fg_2">#4b4b53</color>
+    <color name="muted">#85858d</color>
+    <color name="faint">#b9b9c2</color>
+    <color name="ctl_fg">#63636b</color>
+
+    <!-- 强调 -->
+    <color name="accent">#4f46e5</color>
+    <color name="accent_soft">#eeedfd</color>
+    <color name="accent_fg">#ffffff</color>
+    <color name="sel">#ecebfb</color>
+
+    <!-- 状态 -->
+    <color name="green">#189a58</color>
+    <color name="green_soft">#e4f6ec</color>
+    <color name="red">#d64545</color>
+    <color name="red_soft">#fbe9e9</color>
+    <color name="amber">#b45309</color>
+    <color name="amber_soft">#fbf0df</color>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  暗色 token 取自 yetone/magpie 的 app.css :root[data-theme="dark"]
+  magpie 自己绘制两套主题；Android 这边用 values-night 跟随系统。
+-->
+<resources>
+    <color name="bg">#1a1a1e</color>
+    <color name="card">#232327</color>
+    <color name="card_2">#1f1f23</color>
+
+    <color name="pill">#2d2d33</color>
+    <color name="pill_hover">#36363d</color>
+    <color name="seg_track">#2a2a30</color>
+
+    <color name="line">#333339</color>
+    <color name="line_2">#2c2c32</color>
+
+    <color name="fg">#ededf1</color>
+    <color name="fg_2">#b9b9c1</color>
+    <color name="muted">#8b8b94</color>
+    <color name="faint">#56565f</color>
+    <color name="ctl_fg">#a1a1aa</color>
+
+    <color name="accent">#a5b4fc</color>
+    <color name="accent_soft">#2b2c47</color>
+    <color name="accent_fg">#14142a</color>
+    <color name="sel">#33345a</color>
+
+    <color name="green">#6fd99b</color>
+    <color name="green_soft">#1e3a2b</color>
+    <color name="red">#f28b82</color>
+    <color name="red_soft">#45272a</color>
+    <color name="amber">#f2b544</color>
+    <color name="amber_soft">#3f3220</color>
+</resources>

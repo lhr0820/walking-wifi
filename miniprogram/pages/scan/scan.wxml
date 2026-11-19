@@ -1,0 +1,110 @@
+<view class="wrap">
+
+  <!-- 状态条 -->
+  <view class="card">
+    <view style="display:flex;align-items:center;justify-content:space-between;">
+      <view style="flex:1;">
+        <view class="card-title" style="margin-bottom:6rpx;">
+          {{stage === 'scanning' ? '扫描中…' : '周围的 WiFi'}}
+        </view>
+        <view class="card-sub">{{stageText || '点一下就能复制密码，然后去系统里连'}}</view>
+      </view>
+      <view wx:if="{{stage !== 'scanning'}}" class="tag tag-amber" bindtap="onRescan">重扫</view>
+    </view>
+
+    <block wx:if="{{stage === 'scanning'}}">
+      <view class="divider"></view>
+      <view class="scanning-bar">
+        <view class="spinner"></view>
+        <text class="muted">正在等系统返回列表，通常 2-5 秒</text>
+      </view>
+    </block>
+
+    <block wx:if="{{stage === 'ios_redirect'}}">
+      <view class="divider"></view>
+      <view class="pill">
+        iPhone 上进「设置 → 无线局域网」看一眼，回来点「重扫」就有列表了。这是 iOS 的限制。
+      </view>
+    </block>
+
+    <block wx:if="{{stage === 'unsupported'}}">
+      <view class="divider"></view>
+      <view class="pill">{{stageText}}</view>
+      <view style="height:16rpx;"></view>
+      <view style="display:flex;gap:16rpx;">
+        <view class="btn-ghost" style="flex:1;" bindtap="onManualTap">手动查</view>
+        <view class="btn-ghost" style="flex:1;" bindtap="onRescan">再试一次</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 网络列表 -->
+  <view wx:if="{{nets.length > 0}}" class="card">
+    <block wx:for="{{nets}}" wx:key="bssid">
+
+      <!-- 折行部分：名字 + 信号 -->
+      <view class="net-row" bindtap="onNetTap" data-idx="{{index}}">
+
+        <!-- 信号格 -->
+        <view class="signal">
+          <view class="bar {{item.level >= 1 ? 'on' : ''}}" style="height:14rpx;"></view>
+          <view class="bar {{item.level >= 2 ? 'on' : ''}}" style="height:22rpx;"></view>
+          <view class="bar {{item.level >= 3 ? 'on' : ''}}" style="height:30rpx;"></view>
+          <view class="bar {{item.level >= 4 ? 'on' : ''}}" style="height:38rpx;"></view>
+        </view>
+
+        <view class="net-main">
+          <view class="net-name">{{item.ssid}}</view>
+          <view class="net-sub">
+            <text>{{item.signal}} dBm</text>
+            <text wx:if="{{!item.secure}}" style="color:#189a58;"> · 开放，不用密码</text>
+            <text wx:if="{{item.secure && item.hasPsk}}" style="color:#4f46e5;"> · 点一下复制密码</text>
+            <text wx:if="{{item.secure && item.hasPsk === false}}" style="color:#b9b9c2;"> · 密码库里没有</text>
+          </view>
+        </view>
+
+        <text wx:if="{{connectedSsid === item.ssid}}" class="tag tag-green">已连上</text>
+        <text wx:elif="{{item.hasPsk}}" class="tag-copy">复制</text>
+        <text wx:else class="arrow">›</text>
+      </view>
+
+      <!-- 展开的密码卡片 -->
+      <view wx:if="{{expandedIdx === index}}" class="psk-panel">
+
+        <view class="psk-label">{{item.ssid}} 的密码</view>
+
+        <view class="psk-big" bindlongpress="onCopyAgain" data-psk="{{item.top}}">{{item.top}}</view>
+
+        <view class="psk-actions">
+          <view class="btn-ghost" style="flex:1;" bindtap="onCopyAgain" data-psk="{{item.top}}">再复制一次</view>
+          <view wx:if="{{canDirectConnect}}" class="btn-ghost" style="flex:1;"
+                bindtap="onDirectConnectTap" data-idx="{{index}}">帮我直接连</view>
+        </view>
+
+        <!-- 下一步指引：说清楚具体点哪里 -->
+        <view class="steps">
+          <view class="steps-title">接下来这样连：</view>
+          <view class="step"><text class="step-n">1</text><text>打开手机「设置」</text></view>
+          <view class="step"><text class="step-n">2</text><text>点「WLAN / 无线局域网」</text></view>
+          <view class="step"><text class="step-n">3</text><text>找到「{{item.ssid}}」点进去</text></view>
+          <view class="step"><text class="step-n">4</text><text>密码框长按 → 粘贴</text></view>
+        </view>
+
+        <view class="collapse" bindtap="onCollapseTap">收起</view>
+      </view>
+
+    </block>
+  </view>
+
+  <!-- 连接尝试的反馈（只在点了「帮我直接连」时出现） -->
+  <view wx:if="{{connectText}}" class="card">
+    <view class="pill">{{connectText}}</view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="faint" style="text-align:center;margin-top:24rpx;line-height:1.7;">
+    只显示周围扫到的网络，不上传你的位置或 WiFi 列表<br/>
+    仅用于公开公用网络，请勿用于他人私有网络
+  </view>
+
+</view>

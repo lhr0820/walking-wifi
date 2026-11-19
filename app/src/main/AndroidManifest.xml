@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- WiFi 扫描与连接 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- Android 9 及以下扫描需要定位权限；10+ 需要 NEARBY_WIFI_DEVICES(33+) 或定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--
+      注意：这里**不能**加 android:usesPermissionFlags="neverForLocation"。
+      加了之后，系统会认为本 App 不从 WiFi 推导位置，从而收紧 WiFi API——
+      实测后果是 WifiNetworkSpecifier 的 requestNetwork() 直接抛 SecurityException，
+      整个「快速探测密码」的路子就废了（日志：requestNetwork 失败：SecurityException）。
+
+      代价：上架时需要如实说明「会因 WiFi 信息推导大致位置」。
+    -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <!-- 网络诊断 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="Walking WiFi"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.WalkingWiFi"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,25 @@
+{
+  "_comment": "示例数据。真实数据不进仓库——把本文件复制为 brand_rules.json 后填入自己的数据，或从后端下发。口令字段故意用无效占位值。",
+  "_updated": "2026-11-19",
+  "_source": "example",
+  "_calculation_note": "仓库内仅示例；真实数据由维护者本地保留",
+  "_tiers": {
+    "1": "按品牌命名规律推算，未经实测",
+    "2": "多来源交叉验证过的常见值",
+    "3": "公开资料明确记载"
+  },
+  "brands": [
+    {
+      "brand": "示例品牌A",
+      "aliases": ["examplea", "EXAMPLA"],
+      "psks": ["example-psk-a-1", "example-psk-a-2"],
+      "suffixes": ["888", "123"]
+    },
+    {
+      "brand": "示例品牌B",
+      "aliases": ["exampleb", "EXAMPLB"],
+      "psks": ["example-psk-b-1"],
+      "suffixes": ["2025"]
+    }
+  ]
+}

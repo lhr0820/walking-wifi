@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+      主题对齐 yetone/magpie：
+        · 无 ActionBar，界面自绘（magpie 也是自绘标题区）
+        · 背景、状态栏、导航栏统一用 bg，让页面像"一整块表面"
+        · colorPrimary 用 accent，但实际按钮都是自绘 pill
+    -->
+    <style name="Theme.WalkingWiFi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryVariant">@color/accent_soft</item>
+        <item name="colorOnPrimary">@color/accent_fg</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="android:textColorPrimary">@color/fg</item>
+        <item name="android:textColorSecondary">@color/muted</item>
+        <item name="android:colorBackground">@color/bg</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+</resources>

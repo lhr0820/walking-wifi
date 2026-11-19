@@ -1,0 +1,157 @@
+/* 全局样式 —— 沿用原生 App 的 magpie 配色，保持品牌一致 */
+page {
+  background: #f4f4f6;
+  color: #1c1c21;
+  font-size: 28rpx;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  padding: 24rpx 28rpx 60rpx;
+}
+
+/* 卡片 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1c1c21;
+  margin-bottom: 10rpx;
+}
+
+.card-sub {
+  font-size: 24rpx;
+  color: #85858d;
+  line-height: 1.6;
+}
+
+/* 药丸背景的小块 */
+.pill {
+  background: #f1f1f4;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 25rpx;
+  color: #4b4b53;
+}
+
+/* 主按钮 */
+.btn-primary {
+  background: #4f46e5;
+  color: #ffffff;
+  border-radius: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.btn-primary.dim {
+  background: #b9b9c2;
+}
+
+/* 次要按钮 */
+.btn-ghost {
+  background: #f1f1f4;
+  color: #4b4b53;
+  border-radius: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+/* 分隔线 */
+.divider {
+  height: 1rpx;
+  background: #ececf0;
+  margin: 24rpx 0;
+}
+
+/* 状态文字 */
+.muted {
+  color: #85858d;
+  font-size: 24rpx;
+}
+
+.faint {
+  color: #b9b9c2;
+  font-size: 22rpx;
+}
+
+/* 密码大字 */
+.psk {
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #1c1c21;
+  letter-spacing: 2rpx;
+  word-break: break-all;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.4;
+}
+
+.tag-green {
+  background: #e6f6ec;
+  color: #189a58;
+}
+
+.tag-amber {
+  background: #fdf3e7;
+  color: #b45309;
+}
+
+/* 输入框 */
+.input {
+  background: #f1f1f4;
+  border-radius: 16rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #1c1c21;
+}
+
+/* 候选密码行 */
+.cand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #ececf0;
+}
+
+.cand:last-child {
+  border-bottom: none;
+}
+
+.cand-psk {
+  font-size: 30rpx;
+  color: #1c1c21;
+  word-break: break-all;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.cand-copy {
+  font-size: 24rpx;
+  color: #4f46e5;
+  padding: 8rpx 16rpx;
+  background: #eeedfb;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}

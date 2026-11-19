@@ -1,0 +1,44 @@
+{
+  "libVersion": "3.18.0",
+  "projectname": "walking-wifi",
+  "condition": {
+    "current": 0,
+    "list": [
+      {
+        "name": "详情页-星巴克",
+        "pathName": "pages/detail/detail",
+        "query": "id=starbucks",
+        "scene": null
+      },
+      {
+        "name": "录入页",
+        "pathName": "pages/add/add",
+        "query": "",
+        "scene": null
+      },
+      {
+        "name": "自检页",
+        "pathName": "pages/selftest/selftest",
+        "query": "",
+        "scene": null
+      }
+    ]
+  },
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "useApiHook": true,
+    "showShadowRootInWxmlPanel": true,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "compileHotReLoad": true,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false
+  }
+}

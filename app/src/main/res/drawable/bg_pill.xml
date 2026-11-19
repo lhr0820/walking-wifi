@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 胶囊控件（对应 magpie 的 pill 变量）：用于按钮、状态标签、选择器 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/pill" />
+    <corners android:radius="9dp" />
+</shape>

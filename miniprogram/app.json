@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/scan/scan",
+    "pages/detail/detail",
+    "pages/add/add",
+    "pages/selftest/selftest"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f4f4f6",
+    "navigationBarTitleText": "到店网络助手",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f4f6"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于识别你当前连接的 WiFi，以便查询对应密码"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ]
+}

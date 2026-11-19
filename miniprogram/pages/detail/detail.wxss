@@ -1,0 +1,9 @@
+.psk-big {
+  font-size: 40rpx;
+  color: #4ADE80;
+  letter-spacing: 2rpx;
+  margin-top: 10rpx;
+}
+.psk-hidden {
+  color: #4A5058;
+}

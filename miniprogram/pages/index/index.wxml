@@ -1,0 +1,137 @@
+<!-- Walking WiFi 首页 · 扫描优先版 -->
+<view class="page">
+
+  <!-- 顶部：一句话说明这是什么 -->
+  <view class="hero">
+    <view class="hero-title">到店网络助手</view>
+    <view class="hero-sub">自动列出周围 WiFi，有密码的排在最前面</view>
+  </view>
+
+  <!-- 状态条 -->
+  <view class="status-bar">
+    <view class="status-text {{stage === 'scanning' ? 'scanning' : ''}}">{{stageText || '准备扫描…'}}</view>
+    <view class="btn-rescan" bindtap="onRescanTap">重新扫描</view>
+  </view>
+
+  <!-- 网络列表 -->
+  <view wx:if="{{nets.length > 0}}" class="net-list">
+    <view wx:for="{{nets}}" wx:key="ssid" class="net-wrap">
+
+      <view class="net-row {{item.hasPsk ? 'has-psk' : ''}} {{expandedIdx === index ? 'active' : ''}}"
+            data-idx="{{index}}" bindtap="onNetTap">
+
+        <!-- 左：信号格 -->
+        <view class="signal">
+          <view class="bar b1 {{item.level >= 1 ? 'on' : ''}}"></view>
+          <view class="bar b2 {{item.level >= 2 ? 'on' : ''}}"></view>
+          <view class="bar b3 {{item.level >= 3 ? 'on' : ''}}"></view>
+          <view class="bar b4 {{item.level >= 4 ? 'on' : ''}}"></view>
+        </view>
+
+        <!-- 中：名字 + 副信息 -->
+        <view class="net-main">
+          <view class="net-name">{{item.ssid}}</view>
+          <view class="net-meta">
+            <text wx:if="{{!item.secure}}" class="tag tag-open">开放网络</text>
+            <text wx:elif="{{item.hasPsk}}" class="tag tag-ok">有密码 {{item.count}} 个</text>
+            <text wx:elif="{{item.hasPsk === false}}" class="tag tag-none">暂未收录</text>
+            <text wx:else class="tag tag-query">查询中</text>
+            <text wx:if="{{item.brand}}" class="tag tag-brand">{{item.brand}}</text>
+          </view>
+        </view>
+
+        <!-- 右：arrow 或 复制提示 -->
+        <view class="net-right">
+          <text wx:if="{{item.hasPsk}}" class="copy-hint">复制</text>
+          <text wx:else class="arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 展开：大字密码 + 步骤 -->
+      <view wx:if="{{expandedIdx === index}}" class="psk-panel">
+        <view class="psk-label">密码（长按可选中）</view>
+        <view class="psk-big" user-select="{{true}}" selectable="{{true}}">{{item.top}}</view>
+
+        <view class="psk-actions">
+          <view class="btn-copy-again" data-psk="{{item.top}}" bindtap="onCopyAgain">再复制一次</view>
+          <view class="btn-collapse" bindtap="onCollapseTap">收起</view>
+        </view>
+
+        <view class="steps">
+          <view class="steps-title">接下来这样连：</view>
+          <view class="step"><text class="step-num">1</text>打开手机「设置」</view>
+          <view class="step"><text class="step-num">2</text>点「WLAN / 无线局域网」</view>
+          <view class="step"><text class="step-num">3</text>找到「{{item.ssid}}」</view>
+          <view class="step"><text class="step-num">4</text>粘贴刚才复制的密码</view>
+        </view>
+
+        <view wx:if="{{item.match === 'brand'}}" class="brand-note">
+          这条是按品牌「{{item.brand}}」匹配的密码，不一定对。不对就试下一个网络，或者问问店员。
+        </view>
+
+        <!-- 直连按钮：只有平台支持才显示 -->
+        <view wx:if="{{canDirectConnect}}" class="direct-zone">
+          <view class="btn-direct" data-idx="{{index}}" bindtap="onDirectConnectTap">帮我直接连这个</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{stage === 'empty' || stage === 'unsupported'}}" class="empty-box">
+    <view class="empty-icon">📡</view>
+    <view class="empty-text">{{stageText}}</view>
+    <view class="btn-rescan-lg" bindtap="onRescanTap">重新扫描</view>
+  </view>
+
+  <!-- 手动搜索：扫不到 / 想提前查 时的退路 -->
+  <view class="search-card">
+    <view class="search-title">直接搜店名或 WiFi 名</view>
+    <view class="search-sub">输「蜜雪」也能查到蜜雪冰城，不用写全名</view>
+    <view class="search-row">
+      <input class="search-input"
+             placeholder="例如：蜜雪冰城 / MIXUE / 星巴克"
+             value="{{searchText}}"
+             bindinput="onSearchInput"
+             confirm-type="search"
+             bindconfirm="onSearchTap" />
+      <view class="btn-search {{searching ? 'busy' : ''}}" bindtap="onSearchTap">
+        {{searching ? '查询中' : '查密码'}}
+      </view>
+    </view>
+
+    <view wx:if="{{searchState}}" class="search-result">
+      <view class="search-result-note">{{searchText2}}</view>
+      <view wx:for="{{searchCandidates}}" wx:key="psk" class="cand-row"
+            data-psk="{{item.psk}}" bindtap="onSearchCandTap">
+        <text class="cand-psk">{{item.psk}}</text>
+        <text class="cand-copy">复制</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 贡献密码 -->
+  <view class="contrib-card">
+    <view wx:if="{{!showContribute}}" class="contrib-entry" bindtap="onShowContribute">
+      <text class="contrib-plus">＋</text>
+      <text>我知道某个店的密码，提交给下一个人用</text>
+    </view>
+
+    <view wx:else class="contrib-form">
+      <view class="contrib-title">提交一个密码</view>
+      <input class="contrib-input" placeholder="WiFi 名字（SSID）"
+             value="{{contribSsid}}" bindinput="onContribSsid" />
+      <input class="contrib-input" placeholder="密码"
+             value="{{contribPsk}}" bindinput="onContribPsk" />
+      <view class="btn-contrib {{contribBusy ? 'busy' : ''}}" bindtap="onSubmitContribute">
+        {{contribBusy ? '提交中…' : '提交'}}
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-note">
+    只收录商家公开的公用网络密码，不涉及任何私人 WiFi。
+  </view>
+
+</view>

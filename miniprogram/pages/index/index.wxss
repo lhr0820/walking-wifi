@@ -1,0 +1,432 @@
+/* Walking WiFi 首页 · 扫描优先版 */
+.page {
+  min-height: 100vh;
+  background: #f6f6f8;
+  padding: 24rpx 24rpx 80rpx;
+  box-sizing: border-box;
+}
+
+/* ── 顶部 ───────────────────────────────── */
+.hero {
+  padding: 8rpx 8rpx 20rpx;
+}
+.hero-title {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #1c1c21;
+  letter-spacing: 1rpx;
+}
+.hero-sub {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #8a8a94;
+}
+
+/* ── 状态条 ─────────────────────────────── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 18rpx;
+  padding: 22rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+.status-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: #5a5a66;
+  line-height: 1.5;
+}
+.status-text.scanning {
+  color: #4f46e5;
+}
+.btn-rescan {
+  flex: none;
+  margin-left: 16rpx;
+  padding: 12rpx 24rpx;
+  font-size: 25rpx;
+  color: #4f46e5;
+  background: #eef0ff;
+  border-radius: 999rpx;
+}
+
+/* ── 网络列表 ───────────────────────────── */
+.net-list {
+  margin-bottom: 24rpx;
+}
+.net-wrap {
+  margin-bottom: 16rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+
+.net-row {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 24rpx;
+  transition: background 0.15s;
+}
+.net-row.active {
+  background: #fafaff;
+}
+/* 有密码的整行左侧加一条品牌色，视觉上一眼能看出「这个能连」 */
+.net-row.has-psk {
+  border-left: 8rpx solid #4f46e5;
+  padding-left: 20rpx;
+}
+
+/* 信号格 */
+.signal {
+  display: flex;
+  align-items: flex-end;
+  width: 52rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+.signal .bar {
+  width: 9rpx;
+  margin-right: 4rpx;
+  background: #dcdce3;
+  border-radius: 2rpx;
+}
+.signal .b1 { height: 12rpx; }
+.signal .b2 { height: 22rpx; }
+.signal .b3 { height: 32rpx; }
+.signal .b4 { height: 40rpx; }
+.signal .bar.on { background: #4f46e5; }
+
+.net-main {
+  flex: 1;
+  min-width: 0;
+}
+.net-name {
+  font-size: 31rpx;
+  font-weight: 600;
+  color: #1c1c21;
+  word-break: break-all;
+  line-height: 1.35;
+}
+.net-meta {
+  margin-top: 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tag {
+  font-size: 22rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  margin-right: 10rpx;
+  line-height: 1.5;
+}
+.tag-ok {
+  color: #0d8f5b;
+  background: #e5f8ef;
+}
+.tag-none {
+  color: #8a8a94;
+  background: #f1f1f5;
+}
+.tag-open {
+  color: #b3700a;
+  background: #fff4e0;
+}
+.tag-query {
+  color: #6b6b78;
+  background: #f1f1f5;
+}
+.tag-brand {
+  color: #4f46e5;
+  background: #eef0ff;
+}
+
+.net-right {
+  flex: none;
+  margin-left: 12rpx;
+}
+.copy-hint {
+  font-size: 24rpx;
+  color: #4f46e5;
+  font-weight: 600;
+}
+.arrow {
+  font-size: 34rpx;
+  color: #c8c8d2;
+  line-height: 1;
+}
+
+/* ── 展开的密码面板 ─────────────────────── */
+.psk-panel {
+  padding: 8rpx 24rpx 28rpx;
+  background: #fafaff;
+  border-top: 1rpx solid #eeeef5;
+}
+.psk-label {
+  text-align: center;
+  font-size: 22rpx;
+  color: #8a8a94;
+  margin-bottom: 12rpx;
+}
+.psk-big {
+  text-align: center;
+  font-size: 46rpx;
+  font-weight: 700;
+  color: #1c1c21;
+  letter-spacing: 2rpx;
+  word-break: break-all;
+  padding: 18rpx 0;
+  background: #fff;
+  border-radius: 14rpx;
+  border: 1rpx dashed #d6d6e0;
+  line-height: 1.3;
+}
+
+.psk-actions {
+  display: flex;
+  margin-top: 18rpx;
+}
+.btn-copy-again {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 27rpx;
+  color: #fff;
+  background: #4f46e5;
+  border-radius: 999rpx;
+  margin-right: 16rpx;
+}
+.btn-collapse {
+  flex: none;
+  padding: 20rpx 32rpx;
+  font-size: 27rpx;
+  color: #6b6b78;
+  background: #eeeef5;
+  border-radius: 999rpx;
+}
+
+.steps {
+  margin-top: 24rpx;
+  background: #fff;
+  border-radius: 14rpx;
+  padding: 20rpx 22rpx;
+}
+.steps-title {
+  font-size: 25rpx;
+  font-weight: 600;
+  color: #1c1c21;
+  margin-bottom: 14rpx;
+}
+.step {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #4a4a56;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+}
+.step-num {
+  flex: none;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 21rpx;
+  color: #fff;
+  background: #4f46e5;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.brand-note {
+  margin-top: 18rpx;
+  font-size: 24rpx;
+  color: #b3700a;
+  background: #fff8ec;
+  border-radius: 12rpx;
+  padding: 16rpx 18rpx;
+  line-height: 1.55;
+}
+
+.direct-zone {
+  margin-top: 18rpx;
+}
+.btn-direct {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 27rpx;
+  color: #4f46e5;
+  background: #eef0ff;
+  border-radius: 999rpx;
+}
+
+/* ── 空状态 ─────────────────────────────── */
+.empty-box {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 56rpx 32rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+.empty-icon {
+  font-size: 72rpx;
+  margin-bottom: 18rpx;
+}
+.empty-text {
+  font-size: 27rpx;
+  color: #6b6b78;
+  line-height: 1.6;
+  margin-bottom: 28rpx;
+}
+.btn-rescan-lg {
+  display: inline-block;
+  padding: 20rpx 56rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4f46e5;
+  border-radius: 999rpx;
+}
+
+/* ── 手动搜索 ───────────────────────────── */
+.search-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+.search-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1c1c21;
+}
+.search-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8a8a94;
+  margin-bottom: 20rpx;
+}
+.search-row {
+  display: flex;
+  align-items: center;
+}
+.search-input {
+  flex: 1;
+  height: 84rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  background: #f6f6f8;
+  border-radius: 14rpx;
+  color: #1c1c21;
+}
+.btn-search {
+  flex: none;
+  margin-left: 16rpx;
+  padding: 0 32rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4f46e5;
+  border-radius: 14rpx;
+}
+.btn-search.busy {
+  background: #a9a6f2;
+}
+
+.search-result {
+  margin-top: 22rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f5;
+}
+.search-result-note {
+  font-size: 24rpx;
+  color: #8a8a94;
+  margin-bottom: 14rpx;
+}
+.cand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 22rpx;
+  background: #fafaff;
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+}
+.cand-psk {
+  font-size: 30rpx;
+  color: #1c1c21;
+  font-weight: 600;
+  word-break: break-all;
+}
+.cand-copy {
+  flex: none;
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #4f46e5;
+}
+
+/* ── 贡献 ───────────────────────────────── */
+.contrib-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 8rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+.contrib-entry {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  font-size: 26rpx;
+  color: #6b6b78;
+}
+.contrib-plus {
+  flex: none;
+  margin-right: 12rpx;
+  font-size: 32rpx;
+  color: #4f46e5;
+}
+.contrib-form {
+  padding: 24rpx 20rpx;
+}
+.contrib-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1c1c21;
+  margin-bottom: 18rpx;
+}
+.contrib-input {
+  height: 84rpx;
+  padding: 0 24rpx;
+  font-size: 27rpx;
+  background: #f6f6f8;
+  border-radius: 14rpx;
+  margin-bottom: 14rpx;
+  color: #1c1c21;
+}
+.btn-contrib {
+  text-align: center;
+  padding: 22rpx 0;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4f46e5;
+  border-radius: 999rpx;
+  margin-top: 6rpx;
+}
+.btn-contrib.busy {
+  background: #a9a6f2;
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 22rpx;
+  color: #a8a8b2;
+  line-height: 1.6;
+  padding: 10rpx 20rpx;
+}
