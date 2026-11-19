@@ -95,3 +95,6 @@ automator-test/screenshots/
 *.log
 # ══ 本地备份（脱敏前的原文件，绝不入库）══
 .local-backup/
+
+# ══ 发布素材（图标各尺寸等，按需另行上传）══
+release-assets/
